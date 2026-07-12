@@ -140,6 +140,36 @@
   .att-pill{flex:1; text-align:center; padding:8px 3px; border:1px solid var(--line); border-radius:8px; font-size:12.5px; font-weight:700; cursor:pointer; background:#fff; color:var(--muted); transition:all .12s; font-family:"Nunito",sans-serif}
   .att-pill.active{color:#fff; border-color:transparent}
   .att-saved{font-size:11px; color:var(--pine); margin-top:5px; min-height:13px}
+  textarea{width:100%; padding:12px 13px; border:1px solid var(--line); border-radius:10px; font:inherit; color:var(--ink); background:#FCFBF9; resize:vertical}
+  textarea:focus{outline:none; border-color:var(--pine); box-shadow:0 0 0 3px var(--pine-soft)}
+  .cx-sub{color:var(--muted); font-size:13px; margin-bottom:16px}
+  .note-item{padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:#FCFBF9; margin-bottom:8px}
+  .note-body{font-size:14px; margin-bottom:7px; white-space:pre-wrap; line-height:1.45}
+  .note-meta{display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--muted); flex-wrap:wrap}
+  .vis-badge{padding:2px 9px; border-radius:999px; font-weight:700; font-size:11px}
+  .vis-internal{background:#EDEBE4; color:#7C877F}
+  .vis-parent{background:var(--pine-soft); color:var(--pine-dark)}
+  .home-hello{font-size:13px; color:var(--muted); margin:0 0 3px}
+  .home-head{margin-bottom:18px}
+  .home-kg{font-family:"Nunito",sans-serif; font-weight:800; font-size:22px; letter-spacing:-.02em}
+  .home-sub{color:var(--muted); font-size:13px; margin-top:3px; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+  .home-sub .role{margin-top:0; padding:2px 10px; font-size:11.5px}
+  .tiles{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px}
+  .tile{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:22px 10px; border:1px solid var(--line); border-radius:14px; background:#FCFBF9; font:inherit; cursor:pointer; transition:border-color .15s, background .15s, transform .05s}
+  .tile:hover{border-color:var(--pine); background:var(--pine-soft)}
+  .tile:active{transform:translateY(1px)}
+  .tile-ic{color:var(--pine); display:flex}
+  .tile-ic svg{width:28px; height:28px}
+  .tile-t{font-family:"Nunito",sans-serif; font-weight:700; font-size:14.5px; color:var(--ink)}
+  .rp-row{padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:#FCFBF9; margin-bottom:8px}
+  .rp-name{font-weight:600; font-size:14px; margin-bottom:8px}
+  .rp-stats{display:flex; gap:6px; flex-wrap:wrap}
+  .rp-stat{padding:3px 9px; border-radius:999px; font-size:12px; font-weight:700; font-family:"Nunito",sans-serif}
+  .st-p{background:var(--pine-soft); color:var(--pine-dark)}
+  .st-a{background:#FBEDE9; color:#B4523E}
+  .st-s{background:#F6EEDD; color:#8A6D2F}
+  .st-e{background:#EDEBE4; color:#7C877F}
+  .pa-child-name{font-family:"Nunito",sans-serif; font-weight:800; font-size:19px; margin:8px 0 4px}
   #f-code{text-transform:uppercase; letter-spacing:.12em; font-weight:700; text-align:center; font-size:18px}
   .loading{color:var(--muted); font-size:14px; text-align:center; padding:20px 0}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -184,10 +214,22 @@
       <!-- choice -->
       <div id="onb-choice">
         <h1>Тавтай морил!</h1>
-        <p class="sub">Та цэцэрлэгтээ хэрхэн холбогдох вэ?</p>
-        <button class="btn" id="btn-go-join">Цэцэрлэгтээ нэгдэх</button>
+        <p class="sub">Та хэн болохоо сонгоно уу.</p>
+        <button class="btn" id="btn-go-join">Багш / Ажилтан — цэцэрлэгтээ нэгдэх</button>
+        <button class="btn ghost" id="btn-go-parent">Эцэг эх — хүүхэдтэйгээ холбогдох</button>
         <button class="btn ghost" id="btn-go-create">Цэцэрлэгээ шинээр бүртгэх</button>
         <div class="foot"><a class="link" id="btn-signout-1">Гарах</a></div>
+      </div>
+
+      <!-- parent join by child code -->
+      <div id="onb-parent" class="hidden">
+        <h1>Хүүхэдтэйгээ холбогдох</h1>
+        <p class="sub">Багшаас авсан хүүхдийн кодоо оруулна уу.</p>
+        <label for="f-pcode">Хүүхдийн код</label>
+        <input id="f-pcode" type="text" placeholder="A7K2QM" maxlength="6" autocapitalize="characters" />
+        <button class="btn" id="btn-parent-link">Холбогдох</button>
+        <div id="pcode-msg" class="msg"></div>
+        <button class="btn ghost" id="btn-back-3">Буцах</button>
       </div>
 
       <!-- join by code -->
@@ -223,25 +265,27 @@
 
     <!-- ============ DASHBOARD VIEW ============ -->
     <div id="view-dash" class="hidden">
-      <p class="hello" id="dash-hello">Тавтай морил</p>
-      <p class="sub">Таны ажлын орон зай бэлэн байна.</p>
-      <div class="kg">
-        <div class="kg-name" id="dash-kg-name">—</div>
-        <div class="kg-region" id="dash-kg-region"></div>
-        <span class="role" id="dash-role">—</span>
+      <p class="home-hello" id="dash-hello">Тавтай морил</p>
+      <div class="home-head">
+        <div class="home-kg" id="dash-kg-name">—</div>
+        <div class="home-sub"><span id="dash-kg-region"></span><span class="role" id="dash-role">—</span></div>
       </div>
-      <div class="menu">
-        <button class="menu-item" id="go-classrooms">
-          <span class="menu-txt">Бүлгүүд</span>
-          <span class="menu-arrow">&rsaquo;</span>
+      <div class="tiles">
+        <button class="tile" id="go-children">
+          <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg></span>
+          <span class="tile-t">Хүүхдүүд</span>
         </button>
-        <button class="menu-item" id="go-children">
-          <span class="menu-txt">Хүүхдүүд</span>
-          <span class="menu-arrow">&rsaquo;</span>
+        <button class="tile" id="go-attendance">
+          <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.3 12.4l2.6 2.6 4.8-5.2"/></svg></span>
+          <span class="tile-t">Ирц</span>
         </button>
-        <button class="menu-item" id="go-attendance">
-          <span class="menu-txt">Ирц</span>
-          <span class="menu-arrow">&rsaquo;</span>
+        <button class="tile" id="go-classrooms">
+          <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></span>
+          <span class="tile-t">Бүлгүүд</span>
+        </button>
+        <button class="tile" id="go-reports">
+          <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></span>
+          <span class="tile-t">Тайлан</span>
         </button>
       </div>
       <div class="code-box" id="dash-code-box">
@@ -340,6 +384,60 @@
       <div id="att-list" class="ch-list"></div>
     </div>
 
+    <!-- ============ CHILD DETAIL VIEW ============ -->
+    <div id="view-child" class="hidden">
+      <div class="screen-head">
+        <a class="back" id="cx-back">&lsaquo; Буцах</a>
+        <h1 id="cx-name">Хүүхэд</h1>
+      </div>
+      <div class="cx-sub" id="cx-cls"></div>
+      <div class="code-box" id="cx-code-box" style="margin-top:0; margin-bottom:16px">
+        <div class="code-label">Эцэг эхийн код (эцэг эхэд өгнө үү)</div>
+        <div class="code" id="cx-code">—</div>
+      </div>
+      <div class="section-title">Ажиглалт, тэмдэглэл</div>
+      <div id="cx-add" class="hidden">
+        <textarea id="cx-body" rows="3" placeholder="Өнөөдөр юу ажиглав, юу хийв..."></textarea>
+        <div class="att-seg" style="margin-top:8px">
+          <button class="att-pill" id="cx-vis-internal">Дотоод</button>
+          <button class="att-pill" id="cx-vis-parent">Эцэг эхэд харагдана</button>
+        </div>
+        <button class="btn" id="cx-add-btn">Тэмдэглэл нэмэх</button>
+        <div id="cx-msg" class="msg"></div>
+        <div class="divider"></div>
+      </div>
+      <div id="cx-notes" class="ch-list"></div>
+    </div>
+
+    <!-- ============ REPORTS VIEW ============ -->
+    <div id="view-reports" class="hidden">
+      <div class="screen-head">
+        <a class="back" id="rp-back">&lsaquo; Буцах</a>
+        <h1>Ирцийн тайлан</h1>
+      </div>
+      <div class="att-controls">
+        <select id="rp-cls"></select>
+        <input id="rp-month" type="month" />
+      </div>
+      <div id="rp-list" class="ch-list"></div>
+    </div>
+
+    <!-- ============ PARENT HOME VIEW ============ -->
+    <div id="view-parent" class="hidden">
+      <p class="home-hello" id="pa-hello">Тавтай морил</p>
+      <div class="home-head">
+        <div class="home-sub">Хүүхдийнхээ мэдээллийг эндээс харна.</div>
+      </div>
+      <select id="pa-child-sel" class="hidden" style="margin-bottom:12px"></select>
+      <div class="pa-child-name" id="pa-child-name"></div>
+      <div class="section-title">Сүүлийн ирц</div>
+      <div id="pa-att" class="ch-list"></div>
+      <div class="divider"></div>
+      <div class="section-title">Багшийн тэмдэглэл</div>
+      <div id="pa-notes" class="ch-list"></div>
+      <div class="foot"><a class="link" id="pa-signout">Гарах</a></div>
+    </div>
+
     <!-- ============ LOADING ============ -->
     <div id="view-loading" class="loading">Ачаалж байна…</div>
 
@@ -370,7 +468,7 @@
   const AGE_NAME = {"2-3":"Бага","3-4":"Дунд","4-5":"Ахлах","5-6":"Бэлтгэл"};
 
   // ---- view switching ----
-  const VIEWS = ["view-auth","view-onboard","view-dash","view-children","view-classrooms","view-cls-detail","view-attendance","view-loading"];
+  const VIEWS = ["view-auth","view-onboard","view-dash","view-children","view-classrooms","view-cls-detail","view-attendance","view-child","view-reports","view-parent","view-loading"];
   function show(id){ VIEWS.forEach(v => byId(v).classList.toggle("hidden", v!==id)); }
   function byId(id){ return document.getElementById(id); }
   function msg(el, text, kind){
@@ -458,12 +556,28 @@
 
   // ---- onboarding sub-views (choice / join / create) ----
   function showOnb(id){
-    ["onb-choice","onb-join","onb-create"].forEach(v => byId(v).classList.toggle("hidden", v!==id));
+    ["onb-choice","onb-join","onb-create","onb-parent"].forEach(v => byId(v).classList.toggle("hidden", v!==id));
   }
   byId("btn-go-join").onclick   = () => { clearMsg(byId("join-msg")); showOnb("onb-join"); };
   byId("btn-go-create").onclick = () => { clearMsg(byId("onboard-msg")); showOnb("onb-create"); };
   byId("btn-back-1").onclick    = () => showOnb("onb-choice");
   byId("btn-back-2").onclick    = () => showOnb("onb-choice");
+  byId("btn-go-parent").onclick = () => { clearMsg(byId("pcode-msg")); showOnb("onb-parent"); };
+  byId("btn-back-3").onclick    = () => showOnb("onb-choice");
+  byId("btn-parent-link").onclick = async function(){
+    const code = byId("f-pcode").value.trim().toUpperCase();
+    const box = byId("pcode-msg"); clearMsg(box);
+    if (!code){ msg(box, "Кодоо оруулна уу."); return; }
+    this.disabled = true;
+    try {
+      const { error } = await client.schema("app").rpc("link_self_as_parent", { p_code: code });
+      if (error) throw error;
+      await route();
+    } catch(e){
+      msg(box, /not_found|no_data/i.test(e.message) ? "Ийм код олдсонгүй. Кодоо шалгана уу." : "Холбогдож чадсангүй: " + e.message);
+      this.disabled = false;
+    }
+  };
 
   // ---- join kindergarten by code ----
   byId("btn-join").onclick = async function(){
@@ -499,7 +613,14 @@
 
     if (error){ setMode("signin"); show("view-auth"); msg(byId("auth-msg"), error.message); return; }
 
-    if (!data || data.length === 0){ showOnb("onb-choice"); show("view-onboard"); return; }
+    const displayName0 = (session.user.user_metadata && session.user.user_metadata.display_name) || "";
+    if (!data || data.length === 0){
+      // not staff — are they a parent? (children RLS returns only their linked kids)
+      const { data: pkids } = await client.from("children")
+        .select("id, full_name").is("deleted_at", null).order("full_name");
+      if (pkids && pkids.length > 0){ showParentHome(pkids, displayName0); return; }
+      showOnb("onb-choice"); show("view-onboard"); return;
+    }
 
     // Show the primary membership (director first if present)
     const m = data.find(x => x.role === "director") || data[0];
@@ -558,7 +679,7 @@
     const list = byId("ch-list");
     list.innerHTML = '<div class="ch-empty">Ачаалж байна…</div>';
     const { data, error } = await client.from("children")
-      .select("id, full_name, dob").is("deleted_at", null).order("full_name");
+      .select("id, full_name, dob, classroom_id, parent_code").is("deleted_at", null).order("full_name");
     if (error){ list.innerHTML = '<div class="ch-empty">Алдаа гарлаа.</div>'; return; }
     if (!data || data.length === 0){
       list.innerHTML = '<div class="ch-empty">'
@@ -568,10 +689,11 @@
     }
     list.innerHTML = "";
     data.forEach(c => {
-      const el = document.createElement("div"); el.className = "ch-row";
+      const el = document.createElement("div"); el.className = "ch-row"; el.style.cursor = "pointer";
       const n = document.createElement("span"); n.className = "ch-name"; n.textContent = c.full_name;
       el.appendChild(n);
-      if (c.dob){ const d = document.createElement("span"); d.className = "ch-dob"; d.textContent = c.dob; el.appendChild(d); }
+      const r = document.createElement("span"); r.className = "ch-dob"; r.textContent = (c.dob ? c.dob + "  " : "") + "\u203A"; el.appendChild(r);
+      el.onclick = () => openChild(c);
       list.appendChild(el);
     });
   }
@@ -818,6 +940,177 @@
     });
     wrap.appendChild(seg); wrap.appendChild(saved);
     return wrap;
+  }
+
+  // ---- child detail + notes ----
+  let currentChild = null, cxVis = "internal";
+  byId("cx-back").onclick = () => showChildren();
+  byId("cx-vis-internal").onclick = () => { cxVis = "internal"; updateVisPills(); };
+  byId("cx-vis-parent").onclick   = () => { cxVis = "parent_visible"; updateVisPills(); };
+  function updateVisPills(){
+    const i = byId("cx-vis-internal"), p = byId("cx-vis-parent");
+    i.classList.toggle("active", cxVis === "internal"); i.style.background = cxVis === "internal" ? "#7C877F" : "";
+    p.classList.toggle("active", cxVis === "parent_visible"); p.style.background = cxVis === "parent_visible" ? "#4C7A6E" : "";
+  }
+  function fmtDate(iso){ try { return new Date(iso).toLocaleDateString("mn-MN"); } catch(e){ return ""; } }
+
+  async function openChild(child){
+    currentChild = child;
+    byId("cx-name").textContent = child.full_name;
+    // classroom name + can-write check
+    let clsName = "Бүлэгт хуваарилагдаагүй";
+    if (child.classroom_id){
+      const { data } = await client.from("classrooms").select("name").eq("id", child.classroom_id).maybeSingle();
+      clsName = (data && data.name) || "Бүлэг";
+    }
+    byId("cx-cls").textContent = clsName;
+    byId("cx-code").textContent = child.parent_code || "—";
+    // fetch caller's assigned classrooms (fresh)
+    const { data: asg } = await client.from("classroom_staff")
+      .select("classroom_id").eq("user_id", ctx.uid).is("ended_at", null);
+    const assigned = new Set((asg || []).map(r => r.classroom_id));
+    const canWrite = !!child.classroom_id && assigned.has(child.classroom_id);
+    byId("cx-add").classList.toggle("hidden", !canWrite);
+    cxVis = "internal"; updateVisPills();
+    byId("cx-body").value = ""; clearMsg(byId("cx-msg"));
+    show("view-child");
+    renderNotes();
+  }
+  async function renderNotes(){
+    const box = byId("cx-notes"); box.innerHTML = '<div class="ch-empty">Ачаалж байна…</div>';
+    const { data, error } = await client.from("notes")
+      .select("id, body, visibility, created_at, profiles(display_name)")
+      .eq("child_id", currentChild.id).is("deleted_at", null).order("created_at", { ascending:false });
+    if (error){ box.innerHTML = '<div class="ch-empty">Алдаа гарлаа.</div>'; return; }
+    if (!data || data.length === 0){ box.innerHTML = '<div class="ch-empty">Тэмдэглэл алга байна.</div>'; return; }
+    box.innerHTML = "";
+    data.forEach(n => {
+      const el = document.createElement("div"); el.className = "note-item";
+      const body = document.createElement("div"); body.className = "note-body"; body.textContent = n.body || "";
+      const meta = document.createElement("div"); meta.className = "note-meta";
+      const vb = document.createElement("span");
+      vb.className = "vis-badge " + (n.visibility === "parent_visible" ? "vis-parent" : "vis-internal");
+      vb.textContent = n.visibility === "parent_visible" ? "Эцэг эхэд" : "Дотоод";
+      const who = document.createElement("span");
+      who.textContent = ((n.profiles && n.profiles.display_name) || "") + " · " + fmtDate(n.created_at);
+      meta.appendChild(vb); meta.appendChild(who);
+      el.appendChild(body); el.appendChild(meta); box.appendChild(el);
+    });
+  }
+  byId("cx-add-btn").onclick = async function(){
+    const body = byId("cx-body").value.trim();
+    const box = byId("cx-msg"); clearMsg(box);
+    if (!body){ msg(box, "Тэмдэглэлээ бичнэ үү."); return; }
+    this.disabled = true;
+    try {
+      const { error } = await client.from("notes").insert({
+        kindergarten_id: ctx.kgId, classroom_id: currentChild.classroom_id, child_id: currentChild.id,
+        author_user_id: ctx.uid, kind: "observation", body: body, visibility: cxVis
+      });
+      if (error) throw error;
+      byId("cx-body").value = ""; cxVis = "internal"; updateVisPills();
+      msg(box, "Нэмэгдлээ.", "ok");
+      await renderNotes();
+    } catch(e){ msg(box, "Нэмж чадсангүй: " + e.message); }
+    this.disabled = false;
+  };
+
+  // ---- reports (attendance summary) ----
+  byId("go-reports").onclick = () => showReports();
+  byId("rp-back").onclick = () => show("view-dash");
+  byId("rp-cls").onchange = () => loadReport();
+  byId("rp-month").onchange = () => loadReport();
+  async function showReports(){
+    byId("rp-month").value = todayLocal().slice(0,7);
+    const sel = byId("rp-cls"); sel.innerHTML = '<option>Ачаалж байна…</option>';
+    show("view-reports");
+    const { data } = await client.from("classrooms")
+      .select("id, name").is("deleted_at", null).eq("archived", false).order("name");
+    sel.innerHTML = "";
+    if (!data || data.length === 0){
+      const o = document.createElement("option"); o.value = ""; o.textContent = "(бүлэг алга)"; sel.appendChild(o);
+      byId("rp-list").innerHTML = '<div class="ch-empty">Танд хандах бүлэг алга байна.</div>'; return;
+    }
+    data.forEach(cl => { const o = document.createElement("option"); o.value = cl.id; o.textContent = cl.name; sel.appendChild(o); });
+    loadReport();
+  }
+  async function loadReport(){
+    const clsId = byId("rp-cls").value, month = byId("rp-month").value;
+    const list = byId("rp-list");
+    if (!clsId || !month){ list.innerHTML = ""; return; }
+    list.innerHTML = '<div class="ch-empty">Ачаалж байна…</div>';
+    const start = month + "-01";
+    const [y, m] = month.split("-").map(Number);
+    const next = (m === 12) ? (y+1) + "-01-01" : y + "-" + String(m+1).padStart(2,"0") + "-01";
+    const { data: kids } = await client.from("children")
+      .select("id, full_name").eq("classroom_id", clsId).is("deleted_at", null).order("full_name");
+    if (!kids || kids.length === 0){ list.innerHTML = '<div class="ch-empty">Энэ бүлэгт хүүхэд алга байна.</div>'; return; }
+    const { data: att } = await client.from("attendance")
+      .select("child_id, status").eq("classroom_id", clsId).gte("date", start).lt("date", next);
+    const counts = {};
+    kids.forEach(k => counts[k.id] = { present:0, absent:0, sick:0, excused:0 });
+    (att || []).forEach(a => { if (counts[a.child_id] && counts[a.child_id][a.status] !== undefined) counts[a.child_id][a.status]++; });
+    list.innerHTML = "";
+    kids.forEach(k => {
+      const c = counts[k.id];
+      const el = document.createElement("div"); el.className = "rp-row";
+      const nm = document.createElement("div"); nm.className = "rp-name"; nm.textContent = k.full_name;
+      const st = document.createElement("div"); st.className = "rp-stats";
+      const mk = (t, v, cl) => { const s = document.createElement("span"); s.className = "rp-stat " + cl; s.textContent = t + " " + v; return s; };
+      st.appendChild(mk("Ирсэн", c.present, "st-p"));
+      st.appendChild(mk("Тас", c.absent, "st-a"));
+      st.appendChild(mk("Өвч", c.sick, "st-s"));
+      st.appendChild(mk("Чөлөө", c.excused, "st-e"));
+      el.appendChild(nm); el.appendChild(st); list.appendChild(el);
+    });
+  }
+
+  // ---- parent home ----
+  wireSignout("pa-signout");
+  let paChildren = [];
+  async function showParentHome(kids, name){
+    paChildren = kids;
+    byId("pa-hello").textContent = name ? ("Сайн байна уу, " + name) : "Тавтай морил";
+    const sel = byId("pa-child-sel");
+    if (kids.length > 1){
+      sel.classList.remove("hidden"); sel.innerHTML = "";
+      kids.forEach(c => { const o = document.createElement("option"); o.value = c.id; o.textContent = c.full_name; sel.appendChild(o); });
+      sel.onchange = () => renderParentChild(sel.value);
+    } else { sel.classList.add("hidden"); }
+    show("view-parent");
+    renderParentChild(kids[0].id);
+  }
+  async function renderParentChild(childId){
+    const child = paChildren.find(c => c.id === childId) || paChildren[0];
+    byId("pa-child-name").textContent = child.full_name;
+    // recent attendance
+    const attBox = byId("pa-att"); attBox.innerHTML = '<div class="ch-empty">Ачаалж байна…</div>';
+    const { data: att } = await client.from("attendance")
+      .select("date, status").eq("child_id", childId).order("date", { ascending:false }).limit(14);
+    attBox.innerHTML = "";
+    if (!att || att.length === 0){ attBox.innerHTML = '<div class="ch-empty">Ирцийн мэдээлэл алга байна.</div>'; }
+    else att.forEach(a => {
+      const el = document.createElement("div"); el.className = "ch-row";
+      const d = document.createElement("span"); d.className = "ch-name"; d.textContent = fmtDate(a.date);
+      const meta = ATT.find(x => x.v === a.status) || { t:a.status, c:"#7C877F" };
+      const s = document.createElement("span"); s.className = "vis-badge"; s.style.background = meta.c; s.style.color = "#fff"; s.textContent = meta.t;
+      el.appendChild(d); el.appendChild(s); attBox.appendChild(el);
+    });
+    // parent-visible notes
+    const nBox = byId("pa-notes"); nBox.innerHTML = '<div class="ch-empty">Ачаалж байна…</div>';
+    const { data: notes } = await client.from("notes")
+      .select("body, created_at, profiles(display_name)")
+      .eq("child_id", childId).eq("visibility", "parent_visible").is("deleted_at", null)
+      .order("created_at", { ascending:false });
+    nBox.innerHTML = "";
+    if (!notes || notes.length === 0){ nBox.innerHTML = '<div class="ch-empty">Тэмдэглэл алга байна.</div>'; }
+    else notes.forEach(n => {
+      const el = document.createElement("div"); el.className = "note-item";
+      const body = document.createElement("div"); body.className = "note-body"; body.textContent = n.body || "";
+      const meta = document.createElement("div"); meta.className = "note-meta";
+      meta.textContent = ((n.profiles && n.profiles.display_name) || "Багш") + " · " + fmtDate(n.created_at);
+      el.appendChild(body); el.appendChild(meta); nBox.appendChild(el);
+    });
   }
 
   // ---- friendly auth errors ----
