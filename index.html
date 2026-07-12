@@ -24,10 +24,10 @@
 
 <style>
   :root{
-    --paper:#F5F3EE; --card:#FFFFFF; --ink:#26302E; --muted:#7C877F;
-    --pine:#4C7A6E; --pine-dark:#3C665B; --pine-soft:#E9F0EC;
-    --apricot:#E39B6E; --line:#E6E3DB; --danger:#B4523E;
-    --shadow:0 12px 40px rgba(38,48,46,.10); --radius:18px;
+    --paper:#F4F2EC; --card:#FFFFFF; --ink:#25302E; --muted:#7B867E;
+    --pine:#4C7A6E; --pine-dark:#3B655A; --pine-soft:#E9F0EC;
+    --apricot:#E39B6E; --line:#EAE7DF; --danger:#B4523E;
+    --shadow:0 1px 3px rgba(38,48,46,.05), 0 14px 34px rgba(38,48,46,.07); --radius:22px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
@@ -35,19 +35,20 @@
     font-family:"Inter",system-ui,sans-serif; color:var(--ink);
     background:var(--paper);
     background-image:
-      radial-gradient(900px 500px at 15% -10%, #EAF1EC 0%, transparent 60%),
-      radial-gradient(700px 500px at 100% 110%, #F3EBE2 0%, transparent 55%);
+      radial-gradient(1100px 560px at 12% -12%, #E7F0EA 0%, transparent 62%),
+      radial-gradient(820px 560px at 104% 112%, #F6ECE0 0%, transparent 58%),
+      radial-gradient(600px 400px at 90% -8%, #F3E8EE 0%, transparent 60%);
     min-height:100%; display:flex; align-items:center; justify-content:center;
     padding:24px; line-height:1.5;
   }
   .wrap{width:100%; max-width:420px}
 
-  .brand{text-align:center; margin-bottom:16px}
-  .brand img{width:208px; max-width:72%; height:auto; display:inline-block}
+  .brand{text-align:center; margin-bottom:14px}
+  .brand img{width:176px; max-width:64%; height:auto; display:inline-block}
 
   .card{
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow:var(--shadow); padding:28px 26px;
+    box-shadow:var(--shadow); padding:30px 26px;
   }
   h1{font-family:"Nunito",sans-serif; font-weight:800; font-size:22px; margin:0 0 4px; letter-spacing:-.02em}
   .sub{color:var(--muted); font-size:14px; margin:0 0 22px}
@@ -56,18 +57,19 @@
 
   label{display:block; font-size:13px; font-weight:600; color:#4A544E; margin:14px 0 6px}
   input{
-    width:100%; padding:12px 13px; border:1px solid var(--line); border-radius:10px;
-    font:inherit; color:var(--ink); background:#FCFBF9; transition:border-color .15s, box-shadow .15s;
+    width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:12px;
+    font:inherit; color:var(--ink); background:#FCFBF8; transition:border-color .15s, box-shadow .15s;
   }
   input:focus{outline:none; border-color:var(--pine); box-shadow:0 0 0 3px var(--pine-soft)}
   input::placeholder{color:#B4BAB4}
 
   .btn{
-    width:100%; margin-top:20px; padding:12px 16px; border:0; border-radius:10px;
+    width:100%; margin-top:20px; padding:13px 16px; border:0; border-radius:12px;
     font:inherit; font-weight:700; font-family:"Nunito",sans-serif; font-size:15px;
-    background:var(--pine); color:#fff; cursor:pointer; transition:background .15s, transform .05s;
+    background:linear-gradient(180deg, #578678, var(--pine)); color:#fff; cursor:pointer;
+    box-shadow:0 2px 8px rgba(76,122,110,.28); transition:filter .15s, transform .05s, box-shadow .15s;
   }
-  .btn:hover{background:var(--pine-dark)}
+  .btn:hover{filter:brightness(1.05); box-shadow:0 4px 14px rgba(76,122,110,.34)}
   .btn:active{transform:translateY(1px)}
   .btn[disabled]{opacity:.6; cursor:default}
   .btn.ghost{background:transparent; color:var(--pine); margin-top:10px}
@@ -117,7 +119,8 @@
   .back:hover{text-decoration:underline}
   .screen-head h1{margin:0}
   .ch-list{margin-top:6px}
-  .ch-row{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:#FCFBF9; margin-bottom:8px}
+  .ch-row{display:flex; align-items:center; justify-content:space-between; padding:13px 15px; border:1px solid var(--line); border-radius:12px; background:#FFFDFB; margin-bottom:8px; transition:border-color .12s, box-shadow .12s}
+  .ch-row:hover{border-color:#D8DAD3}
   .ch-name{font-weight:600; font-size:15px}
   .ch-dob{color:var(--muted); font-size:13px}
   .ch-empty{color:var(--muted); font-size:14px; text-align:center; padding:16px 0}
@@ -155,12 +158,20 @@
   .home-sub{color:var(--muted); font-size:13px; margin-top:3px; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
   .home-sub .role{margin-top:0; padding:2px 10px; font-size:11.5px}
   .tiles{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px}
-  .tile{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:22px 10px; border:1px solid var(--line); border-radius:14px; background:#FCFBF9; font:inherit; cursor:pointer; transition:border-color .15s, background .15s, transform .05s}
-  .tile:hover{border-color:var(--pine); background:var(--pine-soft)}
-  .tile:active{transform:translateY(1px)}
-  .tile-ic{color:var(--pine); display:flex}
-  .tile-ic svg{width:28px; height:28px}
+  .tile{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px; padding:22px 10px; border:1px solid var(--line); border-radius:16px; background:#FFFDFB; font:inherit; cursor:pointer; box-shadow:0 1px 2px rgba(38,48,46,.04); transition:box-shadow .16s, transform .06s, border-color .16s}
+  .tile:hover{box-shadow:0 6px 18px rgba(38,48,46,.10); transform:translateY(-1px)}
+  .tile:active{transform:translateY(0)}
+  .tile-ic{width:50px; height:50px; border-radius:15px; display:flex; align-items:center; justify-content:center}
+  .tile-ic svg{width:26px; height:26px}
   .tile-t{font-family:"Nunito",sans-serif; font-weight:700; font-size:14.5px; color:var(--ink)}
+  .t-children .tile-ic{background:#E7F0EA; color:#4C7A6E}
+  .t-attendance .tile-ic{background:#E4EFF6; color:#3E7CA8}
+  .t-classrooms .tile-ic{background:#F6EDDA; color:#BC863A}
+  .t-reports .tile-ic{background:#F4E7EE; color:#A85E7E}
+  .t-children:hover{border-color:#8FB6A9}
+  .t-attendance:hover{border-color:#8FB4CF}
+  .t-classrooms:hover{border-color:#D8B87E}
+  .t-reports:hover{border-color:#CB9EB4}
   .rp-row{padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:#FCFBF9; margin-bottom:8px}
   .rp-name{font-weight:600; font-size:14px; margin-bottom:8px}
   .rp-stats{display:flex; gap:6px; flex-wrap:wrap}
@@ -271,19 +282,19 @@
         <div class="home-sub"><span id="dash-kg-region"></span><span class="role" id="dash-role">—</span></div>
       </div>
       <div class="tiles">
-        <button class="tile" id="go-children">
+        <button class="tile t-children" id="go-children">
           <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg></span>
           <span class="tile-t">Хүүхдүүд</span>
         </button>
-        <button class="tile" id="go-attendance">
+        <button class="tile t-attendance" id="go-attendance">
           <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.3 12.4l2.6 2.6 4.8-5.2"/></svg></span>
           <span class="tile-t">Ирц</span>
         </button>
-        <button class="tile" id="go-classrooms">
+        <button class="tile t-classrooms" id="go-classrooms">
           <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></span>
           <span class="tile-t">Бүлгүүд</span>
         </button>
-        <button class="tile" id="go-reports">
+        <button class="tile t-reports" id="go-reports">
           <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></span>
           <span class="tile-t">Тайлан</span>
         </button>
