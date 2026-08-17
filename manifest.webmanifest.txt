@@ -1,0 +1,25 @@
+{
+  "name": "KinderHub",
+  "short_name": "KinderHub",
+  "description": "Цэцэрлэгийн багш, арга зүйч, эрхлэгчийн ухаалаг ажлын орчин",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7FBF9",
+  "theme_color": "#2FA394",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
