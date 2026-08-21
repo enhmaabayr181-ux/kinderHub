@@ -26,17 +26,15 @@
     }
     html=chars.join('');
 
-    // Network safety: never leave the app on an endless loading screen.
     const safetyScript=`<script id="kh-network-safety">\n(function(){\n  const nativeFetch=window.fetch.bind(window);\n  window.fetch=function(input,init){\n    init=init||{};\n    if(init.signal) return nativeFetch(input,init);\n    const controller=new AbortController();\n    const t=setTimeout(()=>controller.abort(),12000);\n    return nativeFetch(input,Object.assign({},init,{signal:controller.signal})).finally(()=>clearTimeout(t));\n  };\n  setTimeout(function(){\n    const loading=document.getElementById('view-loading');\n    if(loading && !loading.classList.contains('hidden')){\n      try{ localStorage.removeItem('kinderhub_supabase_session_v1'); }catch(_e){}\n      const auth=document.getElementById('view-auth');\n      if(auth){\n        loading.classList.add('hidden');\n        auth.classList.remove('hidden');\n        document.body.classList.remove('app-in');\n        const msg=document.getElementById('auth-msg');\n        if(msg){ msg.textContent='Холболт удааширлаа. Дахин нэвтэрнэ үү.'; msg.className='msg show err'; }\n      }\n    }\n  },15000);\n})();\n<\/script>`;
     html=html.replace('</head>',safetyScript+'\n</head>');
 
-    // If a stored session is expired and refresh fails/times out, clear it
-    // instead of keeping route() waiting on a bad session forever.
     html=html.replace(
       /getSession:\s*async\(\)=>\{[\s\S]*?return \{data:\{session:s\},error:null\};\s*\},/,
       `getSession: async()=>{\n          let s=loadSession();\n          if (s && s.expires_at && Date.now()/1000 > s.expires_at-30){\n            if(s.refresh_token){\n              const rr = await Promise.race([\n                this._auth('/token?grant_type=refresh_token',{refresh_token:s.refresh_token}),\n                new Promise(resolve=>setTimeout(()=>resolve({error:{message:'refresh timeout'}}),9000))\n              ]);\n              if (!rr.error && rr.data){ s=rr.data; saveSession(s); }\n              else { saveSession(null); s=null; }\n            } else { saveSession(null); s=null; }\n          }\n          return {data:{session:s},error:null};\n        },`
     );
 
+    html=html.replace('</body>','<script src="/kinderhub-v2-ui.js?v=20260822v2"><\\/script></body>');
     document.open();
     document.write(html);
     document.close();
