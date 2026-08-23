@@ -142,8 +142,8 @@ function ensureSimpleNavigation(){
  if(!nav||!home||!children||!activities||!docs)return;
  if(nav.dataset.khSimple==='1')return;nav.dataset.khSimple='1';
  activities.querySelector('span:last-child').textContent='Үйл ажиллагаа';docs.querySelector('span:last-child').textContent='Баримт';
- let more=document.getElementById('nav-more');if(!more){more=document.createElement('button');more.type='button';more.id='nav-more';more.className='nav-item kh-more-toggle';more.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Цэс</span><span class="kh-more-chevron">⌄</span>';}
- let panel=document.getElementById('kh-more-menu');if(!panel){panel=document.createElement('div');panel.id='kh-more-menu';panel.className='kh-more-menu';panel.innerHTML='<div class="kh-more-menu-title">Бусад хэрэгслүүд</div>';}
+ let more=document.getElementById('nav-more');if(!more){more=document.createElement('button');more.type='button';more.id='nav-more';more.className='nav-item kh-more-toggle open';more.setAttribute('aria-expanded','true');more.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Цэс</span><span class="kh-more-chevron">⌄</span>';}
+ let panel=document.getElementById('kh-more-menu');if(!panel){panel=document.createElement('div');panel.id='kh-more-menu';panel.className='kh-more-menu open';panel.innerHTML='<div class="kh-more-menu-title">Бусад хэрэгслүүд</div>';}
  [home,children,activities,docs,more,panel].forEach(el=>nav.appendChild(el));
  nav.querySelectorAll(':scope > .nav-sec').forEach(el=>el.style.display='none');
  const secondary=['nav-att','nav-plan','nav-observation-library','nav-theme-bank','nav-evaluation','nav-reports','nav-insights','nav-labs','nav-classrooms','nav-ann','nav-team','nav-network','nav-support','nav-owner'];
