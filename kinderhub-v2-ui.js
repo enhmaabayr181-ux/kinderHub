@@ -5,6 +5,7 @@ body{background-image:radial-gradient(circle at 12% 8%,rgba(117,230,213,.24),tra
 .hero,.b-card,.panel,.card,.stat{border:1px solid var(--kh-border)!important;box-shadow:var(--kh-shadow)!important;backdrop-filter:blur(26px) saturate(145%)!important;-webkit-backdrop-filter:blur(26px) saturate(145%)!important}
 .hero{background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(190,246,237,.62),rgba(224,217,255,.60))!important}
 .sidebar{background:rgba(250,253,253,.80)!important;backdrop-filter:blur(30px) saturate(150%)!important;-webkit-backdrop-filter:blur(30px) saturate(150%)!important}
+body:not(.app-in) .sidebar{display:none!important}
 /* Never allow segmented navigation labels to collide */
 .tabs,.seg,.segments,.tab-row,.plan-tabs,[role=tablist]{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;gap:8px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar,.seg::-webkit-scrollbar,.segments::-webkit-scrollbar,.tab-row::-webkit-scrollbar,.plan-tabs::-webkit-scrollbar,[role=tablist]::-webkit-scrollbar{display:none}
@@ -12,9 +13,9 @@ body{background-image:radial-gradient(circle at 12% 8%,rgba(117,230,213,.24),tra
 /* mobile drawer */
 @media(max-width:899px){
  body.app-in .sidebar{display:flex!important;position:fixed!important;z-index:100!important;left:10px!important;top:10px!important;bottom:10px!important;width:min(82vw,310px)!important;height:auto!important;margin:0!important;transform:translateX(calc(-100% - 28px));transition:transform .28s cubic-bezier(.22,1,.36,1)!important;box-shadow:0 30px 80px rgba(20,40,50,.28)!important}
- body.sb-open .sidebar,body.sidebar-open .sidebar{transform:translateX(0)!important}
+ body.app-in.sb-open .sidebar,body.app-in.nav-open .sidebar,body.app-in.sidebar-open .sidebar{display:flex!important;transform:translateX(0)!important;pointer-events:auto!important;visibility:visible!important}
  .sb-backdrop{display:block!important;position:fixed!important;inset:0!important;z-index:90!important;background:rgba(22,38,42,.26)!important;backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important;opacity:0!important;pointer-events:none!important;transition:opacity .25s!important}
- body.sb-open .sb-backdrop,body.sidebar-open .sb-backdrop{opacity:1!important;pointer-events:auto!important}
+ body.sb-open .sb-backdrop,body.nav-open .sb-backdrop,body.sidebar-open .sb-backdrop{display:block!important;opacity:1!important;pointer-events:auto!important}
  .topbar{display:flex!important}
  body.app-in .wrap{padding:14px 18px 118px!important;max-width:680px!important}
  .hero{padding:22px!important;border-radius:28px!important}
@@ -49,9 +50,9 @@ function renameText(){
 }
 function wireDrawer(){
  let back=document.querySelector('.sb-backdrop');if(!back){back=document.createElement('div');back.className='sb-backdrop';document.body.appendChild(back)}
- const close=()=>document.body.classList.remove('sb-open','sidebar-open');
+ const close=()=>document.body.classList.remove('nav-open','sb-open','sidebar-open');
  back.onclick=close;
- document.querySelectorAll('.hamburger').forEach(b=>{b.onclick=(e)=>{e.preventDefault();e.stopPropagation();document.body.classList.toggle('sb-open')}});
+ document.querySelectorAll('.hamburger,#hamburger').forEach(b=>{b.onclick=(e)=>{e.preventDefault();e.stopPropagation();const open=!document.body.classList.contains('nav-open');document.body.classList.toggle('nav-open',open);document.body.classList.toggle('sb-open',open)}});
  document.querySelectorAll('.sidebar .nav-item').forEach(b=>b.addEventListener('click',()=>{if(innerWidth<900)close()}));
 }
 function addExplanations(){
