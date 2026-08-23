@@ -6,6 +6,7 @@ body{background-image:radial-gradient(circle at 12% 8%,rgba(117,230,213,.24),tra
 .hero{background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(190,246,237,.62),rgba(224,217,255,.60))!important}
 .sidebar{background:rgba(250,253,253,.80)!important;backdrop-filter:blur(30px) saturate(150%)!important;-webkit-backdrop-filter:blur(30px) saturate(150%)!important}
 body:not(.app-in) .sidebar,body:not(.app-in) .dock,body:not(.app-in) .topbar,body:not(.app-in) .kh-quick-trigger,body:not(.app-in) .kh-quick-overlay,body:not(.app-in) #kh-notification-center,body:not(.app-in) .kh-notification-center,body:not(.app-in) #kh-notification-bell{display:none!important}
+body:has(#view-auth:not(.hidden)) .sidebar,body:has(#view-auth:not(.hidden)) .dock,body:has(#view-auth:not(.hidden)) .topbar,body:has(#view-auth:not(.hidden)) .kh-quick-trigger,body:has(#view-auth:not(.hidden)) .kh-quick-overlay,body:has(#view-auth:not(.hidden)) #kh-notification-center{display:none!important}
 /* Never allow segmented navigation labels to collide */
 .tabs,.seg,.segments,.tab-row,.plan-tabs,[role=tablist]{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;gap:8px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar,.seg::-webkit-scrollbar,.segments::-webkit-scrollbar,.tab-row::-webkit-scrollbar,.plan-tabs::-webkit-scrollbar,[role=tablist]::-webkit-scrollbar{display:none}
@@ -108,7 +109,11 @@ function ensureEvaluationReportNav(){
   reports.onclick=()=>openAnalyticsMenu('org','nav-reports','Тайлан');document.getElementById('nav-evaluation').insertAdjacentElement('afterend',reports);
  }
 }
-function polish(){renameText();wireDrawer();addExplanations();fixSudUX();ensureQuickCapture();ensureEvaluationReportNav()}
+function syncShellState(){
+ const publicView=['view-auth','view-onboard','view-loading','view-parent'].some(id=>{const el=document.getElementById(id);return el&&!el.classList.contains('hidden')});
+ if(publicView)document.body.classList.remove('app-in','nav-open','sb-open','sidebar-open');
+}
+function polish(){syncShellState();renameText();wireDrawer();addExplanations();fixSudUX();ensureQuickCapture();ensureEvaluationReportNav()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',polish);else polish();
 new MutationObserver(()=>{clearTimeout(window.__khv2t);window.__khv2t=setTimeout(polish,80)}).observe(document.documentElement,{subtree:true,childList:true});
 })();
