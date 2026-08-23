@@ -15,7 +15,7 @@
     html=html.replace("if(add)add.onclick=newChannel;", "if(add&&typeof newChannel==='function')add.onclick=newChannel;");
     html=html.replace("if(sup)sup.onclick=createSupport;", "if(sup&&typeof createSupport==='function')sup.onclick=createSupport;");
     html=html.replace("if(supSend)supSend.onclick=sendSupportReply;", "if(supSend&&typeof sendSupportReply==='function')supSend.onclick=sendSupportReply;");
-    html=html.replace('</body>','<script src="/kinderhub-v2-ui.js?v=20260823v12"></'+'script></body>');
+    html=html.replace('</body>','<script src="/kinderhub-v2-ui.js?v=20260823v13"></'+'script></body>');
     document.open();document.write(html);document.close();
   }catch(e){console.error('KinderHub patch load failed',e);document.body.innerHTML='<main style="font-family:system-ui;padding:24px"><h2>KinderHub ачаалж чадсангүй</h2><p>'+String(e?.message||e)+'</p><button onclick="location.reload()" style="padding:10px 16px;border:0;border-radius:12px;background:#14b8a6;color:white;font-weight:700">Дахин ачаалах</button></main>';}
 })();
