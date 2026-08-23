@@ -46,9 +46,9 @@ body{color:var(--kh-ink)!important;background-color:#f5f6fb!important;background
 @media(min-width:700px){
  body.app-in{background:#f4f0fa!important;background-image:linear-gradient(135deg,#f6f2fb 0%,#f8fafc 55%,#f1f8f6 100%)!important}
  body.app-in .shell{display:flex!important;gap:0!important;min-height:100vh!important;padding:18px!important;box-sizing:border-box!important}
- body.app-in .sidebar{width:232px!important;flex:0 0 232px!important;min-height:calc(100vh - 36px)!important;margin:0!important;padding:22px 14px!important;border:1px solid #eee9f5!important;border-radius:24px 0 0 24px!important;background:#fff!important;box-shadow:0 14px 42px rgba(76,54,110,.08)!important;color:#292534!important}
+ body.app-in .sidebar{width:232px!important;flex:0 0 232px!important;height:calc(100vh - 36px)!important;min-height:0!important;max-height:calc(100vh - 36px)!important;position:sticky!important;top:18px!important;margin:0!important;padding:22px 14px!important;border:1px solid #eee9f5!important;border-radius:24px 0 0 24px!important;background:#fff!important;box-shadow:0 14px 42px rgba(76,54,110,.08)!important;color:#292534!important;overflow:hidden!important}
  body.app-in .side-logo{padding:2px 10px 22px!important;text-align:left!important}body.app-in .side-logo img{width:116px!important;max-height:48px!important;object-fit:contain!important}
- body.app-in .side-nav{display:flex!important;flex-direction:column!important;gap:3px!important;overflow-y:auto!important}
+ body.app-in .side-nav{display:flex!important;flex:1 1 auto!important;min-height:0!important;flex-direction:column!important;gap:3px!important;overflow-x:hidden!important;overflow-y:auto!important;padding-right:3px!important;scrollbar-width:thin!important;scrollbar-color:#d9cbe9 transparent!important}body.app-in .side-nav::-webkit-scrollbar{width:5px!important}body.app-in .side-nav::-webkit-scrollbar-thumb{background:#d9cbe9!important;border-radius:99px!important}
  body.app-in .nav-sec{display:block!important;margin:15px 12px 6px!important;font-size:9px!important;font-weight:800!important;letter-spacing:.11em!important;text-transform:uppercase!important;color:#aaa2b7!important}
  body.app-in .nav-item{width:100%!important;min-height:42px!important;margin:0!important;padding:10px 12px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:11px!important;border-radius:11px!important;font-size:12px!important;font-weight:650!important;text-align:left!important;color:#696373!important}
  body.app-in .nav-item svg{width:18px!important;height:18px!important;flex:0 0 18px!important}body.app-in .nav-item span{display:inline!important;font-size:inherit!important}
@@ -67,7 +67,7 @@ body{color:var(--kh-ink)!important;background-color:#f5f6fb!important;background
  body.app-in.kh-sidebar-collapsed .main{border-left:0!important;border-radius:0 24px 24px 0!important}
  body.app-in .sidebar{transition:width .24s ease,flex-basis .24s ease,opacity .18s ease,transform .24s ease!important}
 }
-@media(min-width:700px) and (max-width:980px){body.app-in .shell{padding:8px!important}body.app-in .sidebar{width:194px!important;flex-basis:194px!important;min-height:calc(100vh - 16px)!important;padding:18px 10px!important;border-radius:18px 0 0 18px!important}body.app-in .main{border-radius:0 18px 18px 0!important}body.app-in .wrap{padding:20px 18px!important}body.app-in .nav-item{min-height:39px!important;padding:8px 10px!important;font-size:11px!important}}
+@media(min-width:700px) and (max-width:980px){body.app-in .shell{padding:8px!important}body.app-in .sidebar{width:194px!important;flex-basis:194px!important;height:calc(100vh - 16px)!important;max-height:calc(100vh - 16px)!important;top:8px!important;padding:18px 10px!important;border-radius:18px 0 0 18px!important}body.app-in .main{border-radius:0 18px 18px 0!important}body.app-in .wrap{padding:20px 18px!important}body.app-in .nav-item{min-height:39px!important;padding:8px 10px!important;font-size:11px!important}}
 `;
 const st=document.createElement('style');st.id='kh-v2-style';st.textContent=css;document.head.appendChild(st);
 
