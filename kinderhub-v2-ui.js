@@ -73,7 +73,9 @@ function openViewFromQuick(view){
  else document.querySelector(`[data-view="${view}"]`)?.click();
 }
 function ensureQuickCapture(){
- const dock=document.querySelector('.dock');if(!dock||dock.querySelector('.kh-quick-trigger'))return;
+ const dock=document.querySelector('.dock');if(!dock)return;
+ dock.querySelectorAll('#dock-orb,.dock-orb').forEach(old=>old.remove());
+ if(dock.querySelector('.kh-quick-trigger'))return;
  const trigger=document.createElement('button');trigger.type='button';trigger.className='kh-quick-trigger';trigger.setAttribute('aria-label','Шуурхай нэмэх');trigger.textContent='+';
  const children=dock.children;dock.insertBefore(trigger,children[2]||null);
  const overlay=document.createElement('div');overlay.className='kh-quick-overlay';overlay.innerHTML=`<section class="kh-quick-panel" role="dialog" aria-modal="true" aria-label="Шуурхай нэмэх"><button class="kh-quick-close" aria-label="Хаах">×</button><div class="kh-quick-head">Шуурхай нэмэх</div><div class="kh-quick-actions"><button class="kh-action" data-kh-action="attendance"><i>✓</i>Ирц</button><button class="kh-action" data-kh-action="observation"><i>✎</i>Ажиглалт</button><button class="kh-action" data-kh-action="capture"><i>＋</i>Шинэ нэмэх</button><button class="kh-action" data-kh-action="activities"><i>✦</i>Үйл ажиллагаа</button><button class="kh-action" data-kh-action="docs"><i>▣</i>Баримт</button></div></section>`;
