@@ -60,8 +60,11 @@ body{color:var(--kh-ink)!important;background-color:#f5f6fb!important;background
  body.app-in .hero,body.app-in .ref-rhythm-card{border-radius:18px!important;box-shadow:none!important;border:1px solid #eee8f5!important}
  body.app-in .ref-card,body.app-in .role-card,body.app-in .analytics-card,body.app-in .chart-card,body.app-in .panel,body.app-in .card{background:#fff!important;border:1px solid #efebf3!important;border-radius:16px!important;box-shadow:0 7px 22px rgba(73,51,104,.05)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
  body.app-in .sb-backdrop{display:none!important;visibility:hidden!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
- body.app-in.kh-sidebar-collapsed .sidebar{width:0!important;min-width:0!important;flex-basis:0!important;padding-left:0!important;padding-right:0!important;border:0!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important;transform:translateX(-24px)!important}
- body.app-in.kh-sidebar-collapsed .main{border-left:1px solid #eee9f5!important;border-radius:24px!important}
+ body.app-in.kh-sidebar-collapsed .sidebar{width:72px!important;min-width:72px!important;flex-basis:72px!important;padding:18px 8px!important;opacity:1!important;overflow:hidden!important;pointer-events:auto!important;transform:none!important}
+ body.app-in.kh-sidebar-collapsed .side-logo{padding:2px 4px 18px!important;text-align:center!important}body.app-in.kh-sidebar-collapsed .side-logo img{width:42px!important;height:42px!important;object-fit:cover!important;object-position:left!important}
+ body.app-in.kh-sidebar-collapsed .nav-item{justify-content:center!important;padding:10px!important}body.app-in.kh-sidebar-collapsed .nav-item span,body.app-in.kh-sidebar-collapsed .nav-sec,body.app-in.kh-sidebar-collapsed .side-user,body.app-in.kh-sidebar-collapsed .side-out{display:none!important}
+ body.app-in.kh-sidebar-collapsed .side-foot{justify-content:center!important;padding:14px 0 2px!important}
+ body.app-in.kh-sidebar-collapsed .main{border-left:0!important;border-radius:0 24px 24px 0!important}
  body.app-in .sidebar{transition:width .24s ease,flex-basis .24s ease,opacity .18s ease,transform .24s ease!important}
 }
 @media(min-width:700px) and (max-width:980px){body.app-in .shell{padding:8px!important}body.app-in .sidebar{width:194px!important;flex-basis:194px!important;min-height:calc(100vh - 16px)!important;padding:18px 10px!important;border-radius:18px 0 0 18px!important}body.app-in .main{border-radius:0 18px 18px 0!important}body.app-in .wrap{padding:20px 18px!important}body.app-in .nav-item{min-height:39px!important;padding:8px 10px!important;font-size:11px!important}}
