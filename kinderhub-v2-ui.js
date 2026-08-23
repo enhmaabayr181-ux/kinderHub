@@ -55,11 +55,14 @@ body{color:var(--kh-ink)!important;background-color:#f5f6fb!important;background
  body.app-in .nav-item:hover{background:#f7f3fb!important;color:#6f2fc2!important}body.app-in .nav-item.active{background:#f1e8fb!important;color:#7225c5!important;box-shadow:inset 3px 0 #7d28cf!important}
  body.app-in .side-foot{margin-top:auto!important;padding:16px 10px 2px!important;display:flex!important;flex-direction:row!important;border-top:1px solid #f0edf4!important}body.app-in .side-user{display:block!important}body.app-in .side-out{display:inline-flex!important}
  body.app-in .main{min-width:0!important;background:#fbfbfd!important;border:1px solid #eee9f5!important;border-left:0!important;border-radius:0 24px 24px 0!important;overflow:hidden!important;box-shadow:0 14px 42px rgba(76,54,110,.08)!important}
- body.app-in .topbar{display:flex!important;position:sticky!important;top:0!important;min-height:62px!important;padding:0 24px!important;border-bottom:1px solid #f0edf4!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(16px)!important}body.app-in .hamburger{display:none!important}body.app-in .topbar-title{font-size:15px!important;color:#302b39!important}
+ body.app-in .topbar{display:flex!important;position:sticky!important;top:0!important;min-height:62px!important;padding:0 24px!important;border-bottom:1px solid #f0edf4!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(16px)!important}body.app-in .hamburger{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;border-radius:10px!important;background:#f5f1f9!important;color:#6f2fc2!important}body.app-in .topbar-title{font-size:15px!important;color:#302b39!important}
  body.app-in .wrap{width:100%!important;max-width:1280px!important;padding:26px!important;box-sizing:border-box!important}
  body.app-in .hero,body.app-in .ref-rhythm-card{border-radius:18px!important;box-shadow:none!important;border:1px solid #eee8f5!important}
  body.app-in .ref-card,body.app-in .role-card,body.app-in .analytics-card,body.app-in .chart-card,body.app-in .panel,body.app-in .card{background:#fff!important;border:1px solid #efebf3!important;border-radius:16px!important;box-shadow:0 7px 22px rgba(73,51,104,.05)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
  body.app-in .sb-backdrop{display:none!important;visibility:hidden!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ body.app-in.kh-sidebar-collapsed .sidebar{width:0!important;min-width:0!important;flex-basis:0!important;padding-left:0!important;padding-right:0!important;border:0!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important;transform:translateX(-24px)!important}
+ body.app-in.kh-sidebar-collapsed .main{border-left:1px solid #eee9f5!important;border-radius:24px!important}
+ body.app-in .sidebar{transition:width .24s ease,flex-basis .24s ease,opacity .18s ease,transform .24s ease!important}
 }
 @media(min-width:700px) and (max-width:980px){body.app-in .shell{padding:8px!important}body.app-in .sidebar{width:194px!important;flex-basis:194px!important;min-height:calc(100vh - 16px)!important;padding:18px 10px!important;border-radius:18px 0 0 18px!important}body.app-in .main{border-radius:0 18px 18px 0!important}body.app-in .wrap{padding:20px 18px!important}body.app-in .nav-item{min-height:39px!important;padding:8px 10px!important;font-size:11px!important}}
 `;
@@ -74,7 +77,7 @@ function wireDrawer(){
  let back=document.querySelector('.sb-backdrop');if(!back){back=document.createElement('div');back.className='sb-backdrop';document.body.appendChild(back)}
  const close=()=>document.body.classList.remove('nav-open','sb-open','sidebar-open');
  back.onclick=close;
- document.querySelectorAll('.hamburger,#hamburger').forEach(b=>{b.onclick=(e)=>{e.preventDefault();e.stopPropagation();const open=!document.body.classList.contains('nav-open');document.body.classList.toggle('nav-open',open);document.body.classList.toggle('sb-open',open)}});
+ document.querySelectorAll('.hamburger,#hamburger').forEach(b=>{b.onclick=(e)=>{e.preventDefault();e.stopPropagation();if(innerWidth>=700){document.body.classList.toggle('kh-sidebar-collapsed');return}const open=!document.body.classList.contains('nav-open');document.body.classList.toggle('nav-open',open);document.body.classList.toggle('sb-open',open)}});
  document.querySelectorAll('.sidebar .nav-item').forEach(b=>b.addEventListener('click',()=>{if(innerWidth<700)close()}));
 }
 function addExplanations(){
