@@ -30,6 +30,26 @@ body{background:radial-gradient(circle at 10% 5%,#eef7ee 0 12%,transparent 30%),
 .modalBox{background:#fffdf7;border-radius:12px;border:1px solid #d7d0c0;box-shadow:12px 16px 0 #cdbfa9}.detailHero{border-radius:8px;background:linear-gradient(120deg,#e5f0e2,#fff0d7);border:1px dashed #bfc9b9}
 .footer{background:#f3eddf}
 @media(max-width:760px){.hero h1{font-size:38px}.heroBox{transform:none;box-shadow:0 10px 0 #e9d7c5}.cat,.cat:nth-child(even),.card:nth-child(n){transform:none}}
+
+/* KinderIdea Marble Pink × Blue palette */
+:root{--ink:#27304f;--sage:#8aa9d8;--deep:#536fae;--cream:#fff8fc;--peach:#f8cfe0;--pink:#f5c9df;--lav:#d9d9f7;--paper:#fffafd}
+body{background:
+radial-gradient(ellipse at 8% 8%,rgba(247,190,220,.72),transparent 30%),
+radial-gradient(ellipse at 88% 12%,rgba(174,211,246,.72),transparent 31%),
+radial-gradient(ellipse at 72% 72%,rgba(221,199,245,.52),transparent 27%),
+radial-gradient(ellipse at 20% 82%,rgba(190,225,245,.5),transparent 30%),
+linear-gradient(135deg,#fff8fc 0%,#f8f4ff 48%,#f4faff 100%);
+background-attachment:fixed;color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.28;background:repeating-radial-gradient(ellipse at 25% 30%,transparent 0 22px,rgba(255,255,255,.8) 24px,transparent 28px 58px)}
+.nav{background:rgba(255,249,253,.78);border-bottom:1px solid rgba(132,150,195,.22);box-shadow:0 8px 28px rgba(103,116,169,.08)}
+.brand{color:#566eae}.brand b{background:linear-gradient(145deg,#f7d0e2,#d4e7fa);box-shadow:2px 3px 0 #c8c9e8}
+.heroBox{background:linear-gradient(120deg,rgba(255,244,250,.94),rgba(226,239,253,.9),rgba(243,230,249,.88));border:1px solid rgba(123,143,190,.2);box-shadow:0 18px 0 rgba(222,204,231,.7),0 30px 70px rgba(92,108,164,.14)}
+.heroBox:before{background:rgba(244,191,217,.5)}.eyebrow{color:#586ca5;background:rgba(229,213,244,.72)}
+.search{background:rgba(255,255,255,.84);border:1px solid rgba(119,139,188,.24);box-shadow:5px 6px 0 rgba(202,204,235,.72)}
+.primary{background:linear-gradient(135deg,#687fba,#a47fb7);color:white}.ghost{background:rgba(246,231,243,.8)}
+.cat{background:rgba(255,252,255,.82);border-color:rgba(128,145,186,.2);box-shadow:4px 5px 0 rgba(215,211,236,.72)}.cat:nth-child(3n+1) .ico{background:#f7d9e7}.cat:nth-child(3n+2) .ico{background:#dcecf9}.cat:nth-child(3n) .ico{background:#e6def6}
+.card{background:rgba(255,253,255,.92);border-color:rgba(129,144,181,.2);box-shadow:5px 7px 0 rgba(216,211,235,.68)}.card:before{background:rgba(246,198,221,.6)}
+.cover{background:linear-gradient(135deg,#f7d7e6 0%,#e4ddf6 48%,#d9edf9 100%)}.tag{color:#5a6da7;background:#e8e8f7}.chip.active{background:linear-gradient(135deg,#667db7,#9b7db4);border-color:transparent}.detailHero{background:linear-gradient(120deg,#f9e1ec,#e3effb,#ece2f7);border-color:#c6c9e5}.footer{background:rgba(247,239,248,.78)}
 </style></head>
 <body>
 <header class="nav"><div class="wrap" style="width:100%;display:flex;align-items:center;gap:28px"><a class="brand" href="#"><b>🌱</b>KinderIdea</a><nav class="links"><a href="#">Нүүр</a><a href="#ideas" onclick="setView(event,0)">Санаа</a><a href="#ideas" onclick="setView(event,1)">Бэлдэц</a><a href="#" onclick="kiSaved(event)">Миний сан</a></nav><div class="actions"><button class="btn ghost">Нэвтрэх</button><button class="btn primary">Бүртгүүлэх</button></div></div></header>
