@@ -50,6 +50,23 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 .cat{background:rgba(255,252,255,.82);border-color:rgba(128,145,186,.2);box-shadow:4px 5px 0 rgba(215,211,236,.72)}.cat:nth-child(3n+1) .ico{background:#f7d9e7}.cat:nth-child(3n+2) .ico{background:#dcecf9}.cat:nth-child(3n) .ico{background:#e6def6}
 .card{background:rgba(255,253,255,.92);border-color:rgba(129,144,181,.2);box-shadow:5px 7px 0 rgba(216,211,235,.68)}.card:before{background:rgba(246,198,221,.6)}
 .cover{background:linear-gradient(135deg,#f7d7e6 0%,#e4ddf6 48%,#d9edf9 100%)}.tag{color:#5a6da7;background:#e8e8f7}.chip.active{background:linear-gradient(135deg,#667db7,#9b7db4);border-color:transparent}.detailHero{background:linear-gradient(120deg,#f9e1ec,#e3effb,#ece2f7);border-color:#c6c9e5}.footer{background:rgba(247,239,248,.78)}
+
+/* BloomGlass — premium marble pink × blue */
+.nav,.heroBox,.cat,.card,.search,.modalBox,.detailFilters select,.chip{
+backdrop-filter:blur(20px) saturate(145%);-webkit-backdrop-filter:blur(20px) saturate(145%)}
+.nav{background:linear-gradient(120deg,rgba(255,247,252,.76),rgba(236,246,255,.68));border-bottom:1px solid rgba(255,255,255,.82)}
+.heroBox{overflow:hidden;background:linear-gradient(125deg,rgba(255,242,250,.76),rgba(232,244,255,.7) 52%,rgba(241,229,250,.72));box-shadow:0 22px 60px rgba(94,105,168,.16),inset 0 1px 0 rgba(255,255,255,.9)}
+.heroBox:after{content:"";position:absolute;width:310px;height:310px;border-radius:50%;right:-70px;bottom:-150px;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(186,218,249,.45) 42%,rgba(243,187,219,.28) 65%,transparent 70%);filter:blur(2px);pointer-events:none}
+.search{box-shadow:0 12px 34px rgba(95,111,170,.12),inset 0 1px 0 white}
+.cat,.card{background:linear-gradient(145deg,rgba(255,255,255,.75),rgba(250,245,255,.57));box-shadow:0 12px 30px rgba(91,108,165,.09),inset 0 1px 0 rgba(255,255,255,.95)}
+.cat:hover,.card:hover{box-shadow:0 20px 42px rgba(91,108,165,.17),inset 0 1px 0 white}
+.ico{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 5px 15px rgba(108,121,171,.08)}
+.primary{background:linear-gradient(135deg,#728ac6 0%,#a47db5 55%,#d489ad 100%);box-shadow:0 8px 20px rgba(126,104,170,.2)}
+.chip,.detailFilters select{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9)}
+.chip.active{box-shadow:0 7px 18px rgba(111,99,163,.2)}
+.cover{position:relative;overflow:hidden}.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.38) 45%,transparent 62%);transform:translateX(-120%);transition:.7s}.card:hover .cover:after{transform:translateX(120%)}
+.modal{backdrop-filter:blur(8px)}.modalBox{background:linear-gradient(145deg,rgba(255,252,255,.94),rgba(239,247,255,.9));box-shadow:0 35px 90px rgba(63,74,125,.28),inset 0 1px 0 white}
+.mobileNav{background:linear-gradient(120deg,rgba(255,247,252,.88),rgba(235,246,255,.86));backdrop-filter:blur(24px) saturate(150%)}
 </style></head>
 <body>
 <header class="nav"><div class="wrap" style="width:100%;display:flex;align-items:center;gap:28px"><a class="brand" href="#"><b>🌱</b>KinderIdea</a><nav class="links"><a href="#">Нүүр</a><a href="#ideas" onclick="setView(event,0)">Санаа</a><a href="#ideas" onclick="setView(event,1)">Бэлдэц</a><a href="#" onclick="kiSaved(event)">Миний сан</a></nav><div class="actions"><button class="btn ghost">Нэвтрэх</button><button class="btn primary">Бүртгүүлэх</button></div></div></header>
