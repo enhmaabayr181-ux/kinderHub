@@ -77,3 +77,17 @@ document.body.insertAdjacentHTML('beforeend',`
 api('categories?select=id,name&is_active=eq.true&order=sort_order').then(d=>{document.querySelector('#kiResCat').innerHTML=d.map(x=>'<option value="'+x.id+'">'+esc(x.name)+'</option>').join('')});
 (async()=>{await kiRestore();if(kiSession&&kiProfile?.plan!=='premium'){const a=document.querySelector('.actions');if(a)a.insertAdjacentHTML('afterbegin','<button class="btn ghost" onclick="kiPremium()">✨ Premium</button>')}await loadIdeas()})();
 });
+const kiOriginalOpenIdea=window.openIdea;
+window.openIdea=async function(id){
+ await kiOriginalOpenIdea(id);
+ try{
+  const rows=await kiApi('ideas?select=is_premium&id=eq.'+id+'&limit=1');
+  if(!rows || !rows[0] || !rows[0].is_premium || kiHasPremium()) return;
+  const detail=document.querySelector('#ideaDetail');
+  detail.querySelectorAll('a.btn.primary').forEach(function(a){
+   if(a.href.indexOf('/storage/v1/object/')<0)return;
+   const box=a.parentElement;
+   box.innerHTML='<b>🔒 Premium бэлдэц</b><div class="muted" style="margin:8px 0 12px">Энэ файлыг татахад Premium эрх хэрэгтэй.</div><button class="btn primary" onclick="kiPremium()">✨ Premium авах</button>';
+  });
+ }catch(e){console.error(e)}
+};
